@@ -9,43 +9,48 @@
 
     <ImageView
         android:id="@+id/card1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/card2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/card2"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/card2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/card1"
-        app:layout_constraintStart_toEndOf="@id/card3"
+        app:layout_constraintLeft_toRightOf="@id/card1"
+        app:layout_constraintRight_toLeftOf="@id/card3"
         app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/card3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/card4"
-        app:layout_constraintStart_toEndOf="@id/card2"
+        app:layout_constraintLeft_toRightOf="@id/card2"
+        app:layout_constraintRight_toLeftOf="@id/card4"
         app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/card4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/card3"
-        app:layout_constraintStart_toEndOf="@id/card5"
+        app:layout_constraintLeft_toRightOf="@id/card3"
+        app:layout_constraintRight_toLeftOf="@id/card5"
         app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/card5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/card4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/card4"
         app:layout_constraintTop_toTopOf="parent" />
 
 
