@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import kr.ac.kumoh.s20181246.w05_01_carddealer.databinding.ActivityMainBinding
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,13 +16,26 @@ class MainActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_main)
         setContentView(binding.root)
 
-        getCardName(30)
+        // not use int, try use random
+        val c = Random.nextInt(52)
+        Log.i("Test", "$c : ${getCardName(c)}")
 
-        binding.card1.setImageResource(R.drawable.c_10_of_clubs)
-        binding.card2.setImageResource(R.drawable.c_9_of_clubs)
-        binding.card3.setImageResource(R.drawable.c_8_of_clubs)
-        binding.card4.setImageResource(R.drawable.c_7_of_clubs)
-        binding.card5.setImageResource(R.drawable.c_6_of_clubs)
+        val res = resources.getIdentifier(
+            getCardName(c),
+            "drawable",
+            packageName)
+        // getCardName(30)
+
+
+
+        // R.drawable.c_10_of_clubs == resource.getIdentifier(getCardName(30), "drawable", packageName)
+
+        binding.card1.setImageResource(res)
+//        binding.card1.setImageResource(R.drawable.c_10_of_clubs)
+//        binding.card2.setImageResource(R.drawable.c_9_of_clubs)
+//        binding.card3.setImageResource(R.drawable.c_8_of_clubs)
+//        binding.card4.setImageResource(R.drawable.c_7_of_clubs)
+//        binding.card5.setImageResource(R.drawable.c_6_of_clubs)
 
     }
 
@@ -44,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.i("getCardName()", "Shape: ${shape}, Num: ${num}")
 
-
-        return "c_10_of_clubs"
+        return "c_${num}_of_${shape}"
     }
 }
