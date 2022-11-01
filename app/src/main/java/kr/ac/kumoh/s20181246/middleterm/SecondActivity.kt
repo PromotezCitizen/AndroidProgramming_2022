@@ -2,7 +2,6 @@ package kr.ac.kumoh.s20181246.middleterm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kr.ac.kumoh.s20181246.middleterm.databinding.ActivityMainBinding
 import kr.ac.kumoh.s20181246.middleterm.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {

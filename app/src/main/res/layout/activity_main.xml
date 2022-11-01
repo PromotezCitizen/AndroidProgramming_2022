@@ -6,12 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="205dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@android:drawable/alert_light_frame"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:id="@+id/img_gundam"
@@ -27,19 +26,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="zudah"
+            android:textColor="#000"
             android:textSize="60sp"
             app:layout_constraintStart_toEndOf="@id/img_gundam"
-            app:layout_constraintTop_toTopOf="@id/img_gundam"
-            />
+            app:layout_constraintTop_toTopOf="@id/img_gundam"/>
         <TextView
             android:id="@+id/txt_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="EMS-10"
+            android:textColor="#000"
             android:textSize="50sp"
-            app:layout_constraintStart_toEndOf="@id/txt_name"
-            app:layout_constraintTop_toBottomOf="@id/txt_name"
-            />
+            app:layout_constraintStart_toStartOf="@id/txt_name"
+            app:layout_constraintTop_toBottomOf="@id/txt_name"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
