@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,13 @@ import kr.ac.kumoh.s20181246.w12_01_recyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+    // implementation 'androidx.activity:activity-ktx:1.6.1' 있을 경우 아래 사용 가능
+    private val model: ListViewModel by viewModels()
+    // 또는
+    // private lateinit var model: ListViewModel 이후 onCreate에서
+    // model = ViewModelProvider(this)[ListViewModel::class.java]
+    private val songAdapter = SongAdapter()
+    private val songs = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +28,27 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.list.layoutManager = LinearLayoutManager(this)
-        binding.list.itemAnimator = DefaultItemAnimator()
-        binding.list.setHasFixedSize(true)
-        binding.list.adapter = SongAdapter()
+        model.getList().observe(this) {
+            // @SuppressLint("NotifyDataSetChanged") 추가하여 warning 없앨 수 있긴 함
+            // songAdapter.notifyDataSetChanged() // 다 다시 그려!!!!!
+            songAdapter.notifyItemRangeChanged(0, model.getSize())
+        }
+
+        for (i in 1..3) {
+            model.add(i.toString())
+        }
+
+        binding.list.apply {
+            layoutManager = LinearLayoutManager(applicationContext) // 여기서 list, 즉 RecyclerView를 의미.
+            itemAnimator = DefaultItemAnimator()
+            setHasFixedSize(true)
+            adapter = songAdapter
+        }
+// 위나 밑이나 동일한 결과를 보인다.
+//        binding.list.layoutManager = LinearLayoutManager(this)
+//        binding.list.itemAnimator = DefaultItemAnimator()
+//        binding.list.setHasFixedSize(true)
+//        binding.list.adapter = songAdapter
     }
 
     inner class SongAdapter : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
@@ -39,9 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.txSong.text = "adf"
+            holder.txSong.text = model.getSong(position)
         }
 
-        override fun getItemCount() = 30
+        override fun getItemCount() = model.getSize()
     }
 }

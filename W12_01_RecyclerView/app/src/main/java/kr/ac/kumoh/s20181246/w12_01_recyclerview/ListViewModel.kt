@@ -17,7 +17,7 @@ class ListViewModel: ViewModel() {
         songs.add(song)
         list.value = songs
     }
-    fun getSont(i: Int) = songs[i]
+    fun getSong(i: Int) = songs[i]
     fun getSize() = songs.size
 
 }
