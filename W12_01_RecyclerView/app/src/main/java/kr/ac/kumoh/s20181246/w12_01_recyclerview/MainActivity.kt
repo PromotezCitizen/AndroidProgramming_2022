@@ -28,10 +28,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        model.getList().observe(this) {
+        // getList 대신 public인 list 변수 사용
+        model.list.observe(this) {
             // @SuppressLint("NotifyDataSetChanged") 추가하여 warning 없앨 수 있긴 함
             // songAdapter.notifyDataSetChanged() // 다 다시 그려!!!!!
-            songAdapter.notifyItemRangeChanged(0, model.getSize())
+            songAdapter.notifyItemRangeChanged(0, model.list.value?.size ?: 0)
         }
 
         for (i in 1..3) {
@@ -64,9 +65,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.txSong.text = model.getSong(position)
+            holder.txSong.text = model.list.value?.get(position) ?: null
         }
 
-        override fun getItemCount() = model.getSize()
+        override fun getItemCount() = model.list.value?.size ?: 0
     }
 }

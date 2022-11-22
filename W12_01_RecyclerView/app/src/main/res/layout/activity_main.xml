@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-     <!--androidx.recyclerview.widget.RecyclerView-->
+    <!-- androidx.recyclerview.widget.RecyclerView -->
+    <!-- 위랑 밑이랑 같은 내용인가..? -->
     <view class="androidx.recyclerview.widget.RecyclerView"
         android:id="@+id/list"
         android:layout_width="match_parent"
