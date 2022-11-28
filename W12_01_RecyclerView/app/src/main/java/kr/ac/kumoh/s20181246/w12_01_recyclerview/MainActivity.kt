@@ -1,5 +1,6 @@
 package kr.ac.kumoh.s20181246.w12_01_recyclerview
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,24 +17,25 @@ import kr.ac.kumoh.s20181246.w12_01_recyclerview.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     // implementation 'androidx.activity:activity-ktx:1.6.1' 있을 경우 아래 사용 가능
-    private val model: ListViewModel by viewModels()
+//    private val model: ListViewModel by viewModels()
     // 또는
-    // private lateinit var model: ListViewModel 이후 onCreate에서
-    // model = ViewModelProvider(this)[ListViewModel::class.java]
+     private lateinit var model: ListViewModel // 이후 onCreate에서
     private val songAdapter = SongAdapter()
-    private val songs = ArrayList<String>()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        model = ViewModelProvider(this)[ListViewModel::class.java]
+
         // getList 대신 public인 list 변수 사용
         model.list.observe(this) {
-            // @SuppressLint("NotifyDataSetChanged") 추가하여 warning 없앨 수 있긴 함
-            // songAdapter.notifyDataSetChanged() // 다 다시 그려!!!!!
-            songAdapter.notifyItemRangeChanged(0, model.list.value?.size ?: 0)
+              // 추가하여 warning 없앨 수 있긴 함
+             songAdapter.notifyDataSetChanged() // 다 다시 그려!!!!!
+//            songAdapter.notifyItemRangeChanged(0, model.list.value?.size ?: 0)
         }
 
         for (i in 1..3) {
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.list.apply {
-            layoutManager = LinearLayoutManager(applicationContext) // 여기서 list, 즉 RecyclerView를 의미.
+            layoutManager = LinearLayoutManager(applicationContext)
             itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
             adapter = songAdapter
@@ -71,3 +74,4 @@ class MainActivity : AppCompatActivity() {
         override fun getItemCount() = model.list.value?.size ?: 0
     }
 }
+
