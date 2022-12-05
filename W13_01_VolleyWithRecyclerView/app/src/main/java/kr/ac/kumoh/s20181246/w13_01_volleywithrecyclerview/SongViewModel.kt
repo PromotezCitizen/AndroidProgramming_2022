@@ -20,11 +20,11 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         const val QUEUE_TAG = "SongVolleyRequest"
     }
 
-    private val url = "https://androidexpressdb-ajrmo.run.goorm.io:3000"
+    private val url = "https://androidexpressdb-ajrmo.run.goorm.io/"
     private val songs = ArrayList<Song>()
     private val _list = MutableLiveData<ArrayList<Song>>()
     val list: LiveData<ArrayList<Song>>
-            get() = _list
+        get() = _list
 
     private lateinit var queue: RequestQueue
 
@@ -44,7 +44,9 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
                 parseJson(it)
                 _list.value = songs
             },
-            {}
+            {
+                Toast.makeText(getApplication(), it.toString(), Toast.LENGTH_LONG).show()
+            }
         )
         request.tag = QUEUE_TAG
         queue.add(request)
@@ -56,8 +58,8 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun parseJson(items: JSONArray) {
-        for (i in 0..items.length()) {
-            val item = items[i] as JSONObject
+        for (i in 0 until items.length()) {
+            val item: JSONObject = items[i] as JSONObject
             val id = item.getInt("id")
             val title = item.getString("title")
             val singer = item.getString("singer")
