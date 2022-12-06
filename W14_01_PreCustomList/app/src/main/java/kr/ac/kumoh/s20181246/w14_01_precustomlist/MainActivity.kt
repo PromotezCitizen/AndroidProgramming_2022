@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.txText.text = model.list.value?.get(position).toString()
-            holder.txSinger.text = model.list.value?.get(position).toString()
+            holder.txText.text = model.list.value?.get(position)?.title
+            holder.txSinger.text = model.list.value?.get(position)?.singer
         }
 
         override fun getItemCount() = model.list.value?.size ?: 0

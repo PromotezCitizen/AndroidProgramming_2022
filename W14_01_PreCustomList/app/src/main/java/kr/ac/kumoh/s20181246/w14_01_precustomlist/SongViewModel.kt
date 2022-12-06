@@ -44,7 +44,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
                 //Toast.makeText(getApplication(), it.toString(), Toast.LENGTH_LONG).show()
                 songs.clear()
                 parseJson(it)
-                Toast.makeText(getApplication(), it.toString(), Toast.LENGTH_LONG).show()
+//                Toast.makeText(getApplication(), it.toString(), Toast.LENGTH_LONG).show()
                 _list.value = songs
             },
             {
