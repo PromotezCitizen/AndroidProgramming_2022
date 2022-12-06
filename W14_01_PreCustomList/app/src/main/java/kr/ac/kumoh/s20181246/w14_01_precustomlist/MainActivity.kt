@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.NetworkImageView
 import kr.ac.kumoh.s20181246.w14_01_precustomlist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity() {
                 // model.list.value?.size ?: 0)
                 // songAdapter.getItemCount())
                 songAdapter.itemCount
-            )}
-
+            )
+        }
 
         model.requestSong()
     }
@@ -48,8 +49,13 @@ class MainActivity : AppCompatActivity() {
         inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             // val txText: TextView = itemView.findViewById(android.R.id.text1)
             // val txText = itemView.findViewById(android.R.id.text1) as TextView
-            val txText = itemView.findViewById<TextView>(R.id.text1)
-            val txSinger = itemView.findViewById<TextView>(R.id.text2)
+            val txText: TextView = itemView.findViewById(R.id.text1)
+            val txSinger:TextView = itemView.findViewById(R.id.text2)
+            val niImage:NetworkImageView = itemView.findViewById(R.id.image)
+
+            init {
+                niImage.setDefaultImageResId(android.R.drawable.ic_menu_report_image)
+            }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -62,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.txText.text = model.list.value?.get(position)?.title
             holder.txSinger.text = model.list.value?.get(position)?.singer
+            holder.niImage.setImageUrl(model.getImageUrl(position), model.imageLoader)
         }
 
         override fun getItemCount() = model.list.value?.size ?: 0
