@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class SongAdapter: RecyclerView.Adapter<SongAdapter.ViewHolder>() {
-        inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
+            View.OnClickListener {
             // val txText: TextView = itemView.findViewById(android.R.id.text1)
             // val txText = itemView.findViewById(android.R.id.text1) as TextView
             val txText: TextView = itemView.findViewById(R.id.text1)
@@ -55,6 +57,11 @@ class MainActivity : AppCompatActivity() {
 
             init {
                 niImage.setDefaultImageResId(android.R.drawable.ic_menu_report_image)
+                itemView.setOnClickListener(this@ViewHolder)
+            }
+
+            override fun onClick(v: View?) {
+                Toast.makeText(application, "눌렸음", Toast.LENGTH_LONG).show()
             }
         }
 
