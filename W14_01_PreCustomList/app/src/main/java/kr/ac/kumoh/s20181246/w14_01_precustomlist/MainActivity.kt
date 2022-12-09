@@ -1,5 +1,6 @@
 package kr.ac.kumoh.s20181246.w14_01_precustomlist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +62,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onClick(v: View?) {
-                Toast.makeText(application, "눌렸음", Toast.LENGTH_LONG).show()
+                val intent = Intent(application, SongActivity::class.java)
+                intent.putExtra(SongActivity.KEY_TITLE, model.list.value?.get(adapterPosition)?.title)
+                intent.putExtra(SongActivity.KEY_SINGER, model.list.value?.get(adapterPosition)?.singer)
+                intent.putExtra(SongActivity.KEY_IMAGE, model.list.value?.get(adapterPosition)?.image)
+                startActivity(intent)
             }
         }
 
