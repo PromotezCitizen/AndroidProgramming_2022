@@ -18,6 +18,7 @@ import java.net.URLEncoder
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
     data class Song (var id: Int, var title: String, var singer: String, var image: String)
+    data class Operater(var id: Int, var name: String, var org: String, var image: String)
 
     companion object {
         const val QUEUE_TAG = "SongVolleyRequest"
@@ -29,6 +30,11 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     private val _list = MutableLiveData<ArrayList<Song>>()
     val list: LiveData<ArrayList<Song>>
         get() = _list
+
+    private val operater = ArrayList<Operater>()
+    private val _list_o = MutableLiveData<ArrayList<Operater>>()
+    val list_o: LiveData<ArrayList<Operater>>
+        get() = _list_o
 
     private var queue: RequestQueue
     var imageLoader: ImageLoader
@@ -54,7 +60,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         // Array를 반환할 경우에는 JsonObjectRequest 대신 JsonArrayRequest 사용
         val request = JsonArrayRequest(
             Request.Method.GET,
-            "${SERVER_URL}/song",
+            "${SERVER_URL}/operater",
             null,
             {
                 //Toast.makeText(getApplication(), it.toString(), Toast.LENGTH_LONG).show()
@@ -75,12 +81,18 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     private fun parseJson(items: JSONArray) {
         for (i in 0 until items.length()) {
             val item: JSONObject = items[i] as JSONObject
+//            val id = item.getInt("id")
+//            val title = item.getString("title")
+//            val singer = item.getString("singer")
+//            val image = item.getString("img")
+//            songs.add(Song(id, title, singer, image))
+
             val id = item.getInt("id")
-            val title = item.getString("title")
-            val singer = item.getString("singer")
+            val name = item.getString("name")
+            val org = item.getString("organization")
             val image = item.getString("img")
 
-            songs.add(Song(id, title, singer, image))
+
         }
     }
 

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(application, SongActivity::class.java)
                 intent.putExtra(SongActivity.KEY_TITLE, model.list.value?.get(adapterPosition)?.title)
                 intent.putExtra(SongActivity.KEY_SINGER, model.list.value?.get(adapterPosition)?.singer)
-                intent.putExtra(SongActivity.KEY_IMAGE, model.list.value?.get(adapterPosition)?.image)
+                intent.putExtra(SongActivity.KEY_IMAGE, model.getImageUrl(adapterPosition))
                 startActivity(intent)
             }
         }
