@@ -2,6 +2,7 @@ package kr.ac.kumoh.s20181246.w14_01_precustomlist
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.util.Log
 import android.widget.Toast
 import androidx.collection.LruCache
 import androidx.lifecycle.AndroidViewModel
@@ -91,8 +92,6 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
             val name = item.getString("name")
             val org = item.getString("organization")
             val image = item.getString("img")
-
-
         }
     }
 
