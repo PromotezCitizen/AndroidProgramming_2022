@@ -23,14 +23,14 @@
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/icon_operater"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_margin="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:drawable/alert_dark_frame"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_org" />
 
@@ -44,7 +44,33 @@
             app:layout_constraintTop_toBottomOf="@id/text_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:stretchColumns="*"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_operater">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textAlignment="center"
+                    android:text="주/보조" />
+                <TextView
+                    android:textAlignment="center"
+                    android:text="이름" />
+                <TextView
+                    android:textAlignment="center"
+                    android:text="데미지" />
+                <TextView
+                    android:textAlignment="center"
+                    android:text="종류" />
+                <TextView
+                    android:textAlignment="center"
+                    android:text="장탄" />
+            </TableRow>
+        </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

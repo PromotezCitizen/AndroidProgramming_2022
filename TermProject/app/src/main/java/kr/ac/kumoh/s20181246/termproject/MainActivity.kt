@@ -26,21 +26,19 @@ class MainActivity : AppCompatActivity() {
         model = ViewModelProvider(this)[OperaterViewModel::class.java]
 
         binding.list.apply {
-            //layoutManager = LinearLayoutManager(applicationContext)
             layoutManager = LinearLayoutManager(application)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = operaterAdapter
         }
 
-        model.list.observe(this) {
+        model.list_o.observe(this) {
             operaterAdapter.notifyItemRangeInserted(
                 0,
-                // model.list.value?.size ?: 0)
-                // songAdapter.getItemCount())
                 operaterAdapter.itemCount
             )
         }
+
 
         model.requestOperater()
     }
@@ -60,9 +58,20 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onClick(v: View?) {
                     val intent = Intent(application, OperaterActivity::class.java)
-                    intent.putExtra(OperaterActivity.KEY_OPER_NAME, model.list.value?.get(adapterPosition)?.name)
-                    intent.putExtra(OperaterActivity.KEY_OPER_ORG, model.list.value?.get(adapterPosition)?.organization)
+                    intent.putExtra(OperaterActivity.KEY_OPER_NAME, model.list_o.value?.get(adapterPosition)?.name)
+                    intent.putExtra(OperaterActivity.KEY_OPER_ORG, model.list_o.value?.get(adapterPosition)?.organization)
                     intent.putExtra(OperaterActivity.KEY_IMAGE, model.getImageUrl((adapterPosition)))
+
+                    // 해당 오퍼레이터의 무기를 intent로 넘기려는 작업
+                    // filter를 이용하여 해당 오퍼레이터의 무기인지를 확인한다.
+
+                    val ls = model.list_w.value?.filter {
+                        it.op_id == model.list_o.value?.get(adapterPosition)?.id
+                    }
+
+                    // ls는 Array타입. intent로 넘기려면 ArrayList로 변환해야 함
+                    intent.putExtra(OperaterActivity.KEY_WEAPON, ls?.toCollection(ArrayList<OperaterViewModel.Weapon>()))
+
                     startActivity(intent)
                 }
         }
@@ -75,11 +84,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.txName.text = model.list.value?.get(position)?.name
-            holder.txOrg.text = model.list.value?.get(position)?.organization
+            holder.txName.text = model.list_o.value?.get(position)?.name
+            holder.txOrg.text = model.list_o.value?.get(position)?.organization
             holder.niIcon.setImageUrl(model.getImageUrl(position), model.imageLoader)
         }
 
-        override fun getItemCount() = model.list.value?.size ?: 0
+        override fun getItemCount() = model.list_o.value?.size ?: 0
     }
 }
